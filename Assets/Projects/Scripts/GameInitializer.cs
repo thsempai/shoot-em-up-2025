@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class GameInitializer : MonoBehaviour
@@ -21,6 +22,13 @@ public class GameInitializer : MonoBehaviour
     [Header("Game Manager")]
     [SerializeField] GameManager gameManager;
 
+    [Space]
+    [Header("Player")]
+    [SerializeField] PlayerControler player;
+    [SerializeField] InputActionAsset playerInputActionAsset;
+    [SerializeField] Vector2 playerPosition;
+    [SerializeField] float playerSpeed;
+
 
     void Start()
     {
@@ -34,6 +42,7 @@ public class GameInitializer : MonoBehaviour
         cameraManager = Instantiate(cameraManager);
         spawner = Instantiate(spawner);
         gameManager = Instantiate(gameManager);
+        player = Instantiate(player);
     }
 
     private void InitializeObjects()
@@ -41,7 +50,13 @@ public class GameInitializer : MonoBehaviour
         cameraManager.Initialize(camPosition, camRotation);
         (Vector3 min, Vector3 max) = cameraManager.GetRightBorderPoints(forwardSpawn);
         spawner.Initialize(enemyPrefab, min, max, batchNumber);
-        gameManager.Initialize(spawner, cooldown);
+
+        player.Initialize(playerPosition, forwardSpawn, cameraManager.Cam, Quaternion.identity, playerSpeed, playerInputActionAsset);
+        player.gameObject.SetActive(true);
+
+        gameManager.Initialize(spawner, cooldown, player);
+
+
     }
 
 }

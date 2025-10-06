@@ -53,3 +53,7 @@ MonoBehaviour:
   batchNumber: 10
   cooldown: 0.1
   gameManager: {fileID: 4513057005452091194, guid: 51bc5d7577b6e3347af8a8dca8568a09, type: 3}
+  player: {fileID: 3796885351369254674, guid: 9380f9c6b7ad33e4bab4610cbe2d88aa, type: 3}
+  playerInputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  playerPosition: {x: 0, y: 0}
+  playerSpeed: 0
