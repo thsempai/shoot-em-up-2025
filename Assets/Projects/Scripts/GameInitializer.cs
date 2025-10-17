@@ -32,6 +32,10 @@ public class GameInitializer : MonoBehaviour
     [SerializeField] float playerSpeed;
 
     [Space]
+    [Header("Player - Bullet")]
+    [SerializeField] BulletBehavior bullet;
+
+    [Space]
     [Header("UI")]
     [SerializeField] LifeViewer lifeCanvas;
     [SerializeField] Image lifeImage;
@@ -62,7 +66,7 @@ public class GameInitializer : MonoBehaviour
         (Vector3 min, Vector3 max) = cameraManager.GetRightBorderPoints(forwardSpawn);
         spawner.Initialize(enemyPrefab, min, max, batchNumber);
 
-        player.Initialize(playerPosition, forwardSpawn, cameraManager.Cam, Quaternion.identity, playerSpeed, playerInputActionAsset);
+        player.Initialize(playerPosition, forwardSpawn, cameraManager.Cam, Quaternion.identity, playerSpeed, playerInputActionAsset, bullet, gameManager);
         player.gameObject.SetActive(true);
 
         player.GetComponent<PlayerCollisionInfo>().Initialize(gameManager);

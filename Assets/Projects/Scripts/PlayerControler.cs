@@ -7,13 +7,22 @@ public class PlayerControler : MonoBehaviour
 {
     private InputActionAsset actions;
     private InputAction moveAction;
+    private InputAction targetAction;
     private const string INPUT_ACTION_MAP = "Player";
-    private const string INPUT_ACTION = "Move";
+    private const string INPUT_MOVE_ACTION = "Move";
+    private const string INPUT_TARGET_ACTION = "Target";
+    private const string INPUT_SHOOT_ACTION = "Shoot";
     private float speed;
 
     private Camera cam;
 
-    public void Initialize(Vector3 position, float spawnForward, Camera cam, Quaternion rotation, float speed, InputActionAsset actions)
+    private BulletBehavior bullet;
+
+    private GameManager gameManager;
+
+    public void Initialize(
+        Vector3 position, float spawnForward, Camera cam, Quaternion rotation,
+        float speed, InputActionAsset actions, BulletBehavior bullet, GameManager gameManager)
     {
         position.z = spawnForward;
         position = cam.ScreenToWorldPoint(position);
@@ -21,19 +30,25 @@ public class PlayerControler : MonoBehaviour
 
         this.cam = cam;
         this.actions = actions;
-        moveAction = actions.FindActionMap(INPUT_ACTION_MAP).FindAction(INPUT_ACTION);
+        moveAction = actions.FindActionMap(INPUT_ACTION_MAP).FindAction(INPUT_MOVE_ACTION);
+        targetAction = actions.FindActionMap(INPUT_ACTION_MAP).FindAction(INPUT_TARGET_ACTION);
 
         this.speed = speed;
+        this.bullet = bullet;
+
+        this.gameManager = gameManager;
     }
 
     void OnEnable()
     {
+        actions.FindActionMap(INPUT_ACTION_MAP).FindAction(INPUT_SHOOT_ACTION).performed += Shoot;
         actions.FindActionMap(INPUT_ACTION_MAP).Enable();
     }
 
     void Disable()
     {
         actions.FindActionMap(INPUT_ACTION_MAP).Disable();
+        actions.FindActionMap(INPUT_ACTION_MAP).FindAction(INPUT_SHOOT_ACTION).performed -= Shoot;
     }
 
     public void Process()
@@ -55,5 +70,18 @@ public class PlayerControler : MonoBehaviour
         transform.position = cam.ScreenToWorldPoint(screenPosition);
     }
 
+    private void Shoot(InputAction.CallbackContext callbackContext)
+    {
+        Vector3 targetPosition = targetAction.ReadValue<Vector2>();
+        targetPosition.z = transform.position.z - cam.transform.position.z;
+
+        targetPosition = cam.ScreenToWorldPoint(targetPosition);
+        Debug.Log(targetPosition.z);
+
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        BulletBehavior newBullet = Instantiate(bullet);
+        newBullet.Initialize(transform.position, direction, 5f, gameManager);
+        gameManager.AddBullet(newBullet);
+    }
 
 }

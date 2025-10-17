@@ -55,8 +55,11 @@ MonoBehaviour:
   gameManager: {fileID: 4513057005452091194, guid: 51bc5d7577b6e3347af8a8dca8568a09, type: 3}
   life: 3
   player: {fileID: 3796885351369254674, guid: 9380f9c6b7ad33e4bab4610cbe2d88aa, type: 3}
-  playerInputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  playerInputActionAsset: {fileID: -944628639613478452, guid: eb64cdcc541b3a640873d976f0c94e72, type: 3}
   playerPosition: {x: 100, y: 100}
   playerSpeed: 12
+  bullet: {fileID: 8756020575663308469, guid: 6d94b983f79329c429fd35a9de7749e2, type: 3}
   lifeCanvas: {fileID: 7374150423376996592, guid: 2b5751eabe0813b49b9d205c58d22784, type: 3}
   lifeImage: {fileID: 3971730888732056908, guid: 9e5faffe5184a2c45aa2f10b1fa1fbdb, type: 3}
+  firstImagePosition: {x: 0, y: 0}
+  imageOffSet: {x: 0, y: 0}
