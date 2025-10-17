@@ -10,11 +10,17 @@ public class GameManager : MonoBehaviour
     private float cooldown;
     private float chrono = 0f;
 
-    public void Initialize(Spawner spawner, float cooldown, PlayerControler player)
+    private int playerLife;
+
+    private LifeViewer lifeViewer;
+
+    public void Initialize(Spawner spawner, float cooldown, PlayerControler player, int playerLife, LifeViewer lifeViewer)
     {
         this.spawner = spawner;
         this.cooldown = cooldown;
         this.player = player;
+        this.playerLife = playerLife;
+        this.lifeViewer = lifeViewer;
     }
 
     private void Update()
@@ -42,5 +48,16 @@ public class GameManager : MonoBehaviour
     public void EnemyLeaveGame(EnemyBehavior enemy)
     {
         spawner.DeSpawn(enemy);
+    }
+
+    public void PlayerContact(GameObject other)
+    {
+
+        if (other.TryGetComponent(out EnemyBehavior enemy))
+        {
+            playerLife -= 1;
+            if (playerLife >= 0) lifeViewer.UpdateImages(playerLife);
+            EnemyLeaveGame(enemy);
+        }
     }
 }

@@ -342,16 +342,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8469039900403972435, guid: ce420ebc21be49b48bba834f93831cfa, type: 3}
-      propertyPath: playerSpeed
-      value: 12
+      propertyPath: life
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8469039900403972435, guid: ce420ebc21be49b48bba834f93831cfa, type: 3}
-      propertyPath: playerPosition.x
-      value: 100
+      propertyPath: imageOffSet.x
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 8469039900403972435, guid: ce420ebc21be49b48bba834f93831cfa, type: 3}
-      propertyPath: playerPosition.y
-      value: 100
+      propertyPath: imageOffSet.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469039900403972435, guid: ce420ebc21be49b48bba834f93831cfa, type: 3}
+      propertyPath: firstImagePosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469039900403972435, guid: ce420ebc21be49b48bba834f93831cfa, type: 3}
+      propertyPath: firstImagePosition.y
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

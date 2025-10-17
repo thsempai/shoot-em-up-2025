@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class GameInitializer : MonoBehaviour
@@ -24,10 +25,19 @@ public class GameInitializer : MonoBehaviour
 
     [Space]
     [Header("Player")]
+    [SerializeField] int life = 3;
     [SerializeField] PlayerControler player;
     [SerializeField] InputActionAsset playerInputActionAsset;
     [SerializeField] Vector2 playerPosition;
     [SerializeField] float playerSpeed;
+
+    [Space]
+    [Header("UI")]
+    [SerializeField] LifeViewer lifeCanvas;
+    [SerializeField] Image lifeImage;
+    [SerializeField] Vector2 firstImagePosition;
+    [SerializeField] Vector2 imageOffSet;
+
 
 
     void Start()
@@ -43,6 +53,7 @@ public class GameInitializer : MonoBehaviour
         spawner = Instantiate(spawner);
         gameManager = Instantiate(gameManager);
         player = Instantiate(player);
+        lifeCanvas = Instantiate(lifeCanvas);
     }
 
     private void InitializeObjects()
@@ -54,7 +65,10 @@ public class GameInitializer : MonoBehaviour
         player.Initialize(playerPosition, forwardSpawn, cameraManager.Cam, Quaternion.identity, playerSpeed, playerInputActionAsset);
         player.gameObject.SetActive(true);
 
-        gameManager.Initialize(spawner, cooldown, player);
+        player.GetComponent<PlayerCollisionInfo>().Initialize(gameManager);
+
+        gameManager.Initialize(spawner, cooldown, player, life, lifeCanvas);
+        lifeCanvas.Initialize(lifeImage, life, firstImagePosition, imageOffSet);
 
 
     }

@@ -55,12 +55,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1376321895136020705, guid: 83354abfe228103419efce6b7c6be7dd, type: 3}
     - {fileID: 4813831375770581821, guid: 83354abfe228103419efce6b7c6be7dd, type: 3}
+    - {fileID: 792742282341402153, guid: 83354abfe228103419efce6b7c6be7dd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6012796979108950982, guid: 83354abfe228103419efce6b7c6be7dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8529638096232657094}
+    - targetCorrespondingSourceObject: {fileID: 6012796979108950982, guid: 83354abfe228103419efce6b7c6be7dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4997104231013700985}
   m_SourcePrefab: {fileID: 100100000, guid: 83354abfe228103419efce6b7c6be7dd, type: 3}
 --- !u!1 &5851409551859437633 stripped
 GameObject:
@@ -122,3 +126,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!135 &-4997104231013700985
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851409551859437633}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

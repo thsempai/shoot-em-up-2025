@@ -2,6 +2,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerCollisionInfo))]
 public class PlayerControler : MonoBehaviour
 {
     private InputActionAsset actions;
@@ -46,6 +47,7 @@ public class PlayerControler : MonoBehaviour
         transform.Translate(movement);
 
         Vector3 screenPosition = cam.WorldToScreenPoint(transform.position);
+
 
         screenPosition.x = Mathf.Clamp(screenPosition.x, 0f, Screen.width);
         screenPosition.y = Mathf.Clamp(screenPosition.y, 0f, Screen.height);
