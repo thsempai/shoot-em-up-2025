@@ -66,8 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void BulletLeaveGame(BulletBehavior bulletBehavior)
     {
-        bullets.Remove(bulletBehavior);
-        Destroy(bulletBehavior.gameObject);
+        bulletsSpawner.DeSpawn(bulletBehavior);
     }
 
     public void EnemyLeaveGame(EnemyBehavior enemy)

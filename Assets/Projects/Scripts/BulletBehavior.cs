@@ -38,4 +38,9 @@ public class BulletBehavior : MonoBehaviour, IPoolClient
         }
         manager.BulletLeaveGame(this);
     }
+
+    void OnBecameInvisible()
+    {
+        manager.BulletLeaveGame(this);
+    }
 }
