@@ -4,7 +4,10 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    private Spawner spawner;
+    private EnemiesSpawner enemiesSpawner;
+    private BulletsSpawner bulletsSpawner;
+    private float bulletDecal = 0.5f;
+    private float bulletSpeed;
     private PlayerControler player;
     private List<EnemyBehavior> enemies = new();
     private List<BulletBehavior> bullets = new();
@@ -15,13 +18,16 @@ public class GameManager : MonoBehaviour
 
     private LifeViewer lifeViewer;
 
-    public void Initialize(Spawner spawner, float cooldown, PlayerControler player, int playerLife, LifeViewer lifeViewer)
+    public void Initialize(EnemiesSpawner enemiesSpawner, BulletsSpawner bulletsSpawner, float bulletDecal, float bulletSpeed, float cooldown, PlayerControler player, int playerLife, LifeViewer lifeViewer)
     {
-        this.spawner = spawner;
+        this.enemiesSpawner = enemiesSpawner;
+        this.bulletsSpawner = bulletsSpawner;
         this.cooldown = cooldown;
         this.player = player;
         this.playerLife = playerLife;
         this.lifeViewer = lifeViewer;
+        this.bulletDecal = bulletDecal;
+        this.bulletSpeed = bulletSpeed;
     }
 
     private void Update()
@@ -30,7 +36,7 @@ public class GameManager : MonoBehaviour
         if (chrono >= cooldown)
         {
             chrono = 0f;
-            EnemyBehavior enemy = spawner.Spawn();
+            EnemyBehavior enemy = enemiesSpawner.Spawn();
             if (!enemies.Contains(enemy))
             {
                 enemies.Add(enemy);
@@ -51,8 +57,10 @@ public class GameManager : MonoBehaviour
         player.Process();
     }
 
-    public void AddBullet(BulletBehavior bullet)
+    public void AddBullet(Vector3 direction)
     {
+        BulletBehavior bullet = bulletsSpawner.Spawn(player.transform, direction, bulletDecal);
+        bullet.Initialize(bulletSpeed, this);
         bullets.Add(bullet);
     }
 
@@ -64,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void EnemyLeaveGame(EnemyBehavior enemy)
     {
-        spawner.DeSpawn(enemy);
+        enemiesSpawner.DeSpawn(enemy);
     }
 
     public void PlayerContact(GameObject other)

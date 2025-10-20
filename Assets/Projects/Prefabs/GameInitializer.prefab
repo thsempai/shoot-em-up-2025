@@ -47,10 +47,10 @@ MonoBehaviour:
   cameraManager: {fileID: -5417105893754394726, guid: a3b35bbfd19f9e743a5944736e5b9669, type: 3}
   camPosition: {x: 0, y: 0, z: -10}
   camRotation: {x: 0, y: 0, z: 0, w: 0}
-  spawner: {fileID: 3490484851474692073, guid: 9ca7f5e0e1508c34f9f18435f86c8658, type: 3}
+  enemiesSpawner: {fileID: 3490484851474692073, guid: 9ca7f5e0e1508c34f9f18435f86c8658, type: 3}
   forwardSpawn: 20
   enemyPrefab: {fileID: 400148643258141263, guid: 0a75f078c4390ed4399740e4d3405cb7, type: 3}
-  batchNumber: 10
+  enemiesBatchNumber: 30
   cooldown: 0.1
   gameManager: {fileID: 4513057005452091194, guid: 51bc5d7577b6e3347af8a8dca8568a09, type: 3}
   life: 3
@@ -58,7 +58,10 @@ MonoBehaviour:
   playerInputActionAsset: {fileID: -944628639613478452, guid: eb64cdcc541b3a640873d976f0c94e72, type: 3}
   playerPosition: {x: 100, y: 100}
   playerSpeed: 12
-  bullet: {fileID: 8756020575663308469, guid: 6d94b983f79329c429fd35a9de7749e2, type: 3}
+  bulletsSpawner: {fileID: 6577616868039768667, guid: f828cdecaff2c434b80708f26e345e99, type: 3}
+  bulletPrefab: {fileID: 8756020575663308469, guid: 6d94b983f79329c429fd35a9de7749e2, type: 3}
+  bulletSpawnDecal: 0.5
+  bulletsBatchNumber: 10
   lifeCanvas: {fileID: 7374150423376996592, guid: 2b5751eabe0813b49b9d205c58d22784, type: 3}
   lifeImage: {fileID: 3971730888732056908, guid: 9e5faffe5184a2c45aa2f10b1fa1fbdb, type: 3}
   firstImagePosition: {x: 0, y: 0}

@@ -13,10 +13,10 @@ public class GameInitializer : MonoBehaviour
 
     [Space]
     [Header("Spawner")]
-    [SerializeField] Spawner spawner;
+    [SerializeField] EnemiesSpawner enemiesSpawner;
     [SerializeField] float forwardSpawn = 20f;
     [SerializeField] EnemyBehavior enemyPrefab;
-    [SerializeField] int batchNumber;
+    [SerializeField] int enemiesBatchNumber;
     [SerializeField] float cooldown;
 
     [Space]
@@ -33,7 +33,11 @@ public class GameInitializer : MonoBehaviour
 
     [Space]
     [Header("Player - Bullet")]
-    [SerializeField] BulletBehavior bullet;
+    [SerializeField] BulletsSpawner bulletsSpawner;
+    [SerializeField] BulletBehavior bulletPrefab;
+    [SerializeField] float bulletSpeed = 5f;
+    [SerializeField] float bulletSpawnDecal = 0.5f;
+    [SerializeField] int bulletsBatchNumber;
 
     [Space]
     [Header("UI")]
@@ -54,26 +58,29 @@ public class GameInitializer : MonoBehaviour
     private void CreateObjects()
     {
         cameraManager = Instantiate(cameraManager);
-        spawner = Instantiate(spawner);
+        enemiesSpawner = Instantiate(enemiesSpawner);
         gameManager = Instantiate(gameManager);
         player = Instantiate(player);
         lifeCanvas = Instantiate(lifeCanvas);
+        bulletsSpawner = Instantiate(bulletsSpawner);
     }
 
     private void InitializeObjects()
     {
         cameraManager.Initialize(camPosition, camRotation);
         (Vector3 min, Vector3 max) = cameraManager.GetRightBorderPoints(forwardSpawn);
-        spawner.Initialize(enemyPrefab, min, max, batchNumber);
+        enemiesSpawner.Initialize(enemyPrefab, min, max, enemiesBatchNumber);
 
-        player.Initialize(playerPosition, forwardSpawn, cameraManager.Cam, Quaternion.identity, playerSpeed, playerInputActionAsset, bullet, gameManager);
+        player.Initialize(playerPosition, forwardSpawn, cameraManager.Cam, Quaternion.identity, playerSpeed, playerInputActionAsset, gameManager);
         player.gameObject.SetActive(true);
 
         player.GetComponent<PlayerCollisionInfo>().Initialize(gameManager);
 
-        gameManager.Initialize(spawner, cooldown, player, life, lifeCanvas);
+        gameManager.Initialize(enemiesSpawner, bulletsSpawner, bulletSpawnDecal, bulletSpeed, cooldown, player, life, lifeCanvas);
+
         lifeCanvas.Initialize(lifeImage, life, firstImagePosition, imageOffSet);
 
+        bulletsSpawner.Initialize(bulletPrefab, bulletsBatchNumber);
 
     }
 

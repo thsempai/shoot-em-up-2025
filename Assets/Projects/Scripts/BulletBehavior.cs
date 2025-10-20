@@ -1,30 +1,39 @@
 using UnityEngine;
 
-public class BulletBehavior : MonoBehaviour
+public class BulletBehavior : MonoBehaviour, IPoolClient
 {
     private Vector3 direction;
     private float speed;
 
     private GameManager manager;
 
-    public void Initialize(Vector3 position, Vector3 direction, float speed, GameManager manager)
+    public void Arise(Vector3 position, Quaternion rotation)
+    {
+        gameObject.SetActive(true);
+        transform.SetLocalPositionAndRotation(position, rotation);
+    }
+
+    public void Fall()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Initialize(float speed, GameManager manager)
     {
         this.speed = speed;
-        this.direction = direction;
         this.manager = manager;
-        transform.position = position;
     }
 
     public void Process()
     {
-        Vector3 movement = speed * Time.deltaTime * direction;
-        transform.Translate(movement, Space.World);
-        transform.up = direction;
+        Vector3 movement = speed * Time.deltaTime * Vector3.up;
+        transform.Translate(movement, Space.Self);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<EnemyBehavior>(out EnemyBehavior enemy)){
+        if (other.TryGetComponent<EnemyBehavior>(out EnemyBehavior enemy))
+        {
             manager.EnemyLeaveGame(enemy);
         }
         manager.BulletLeaveGame(this);

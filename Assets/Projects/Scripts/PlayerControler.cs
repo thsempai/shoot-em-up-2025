@@ -16,13 +16,11 @@ public class PlayerControler : MonoBehaviour
 
     private Camera cam;
 
-    private BulletBehavior bullet;
-
     private GameManager gameManager;
 
     public void Initialize(
         Vector3 position, float spawnForward, Camera cam, Quaternion rotation,
-        float speed, InputActionAsset actions, BulletBehavior bullet, GameManager gameManager)
+        float speed, InputActionAsset actions, GameManager gameManager)
     {
         position.z = spawnForward;
         position = cam.ScreenToWorldPoint(position);
@@ -34,7 +32,6 @@ public class PlayerControler : MonoBehaviour
         targetAction = actions.FindActionMap(INPUT_ACTION_MAP).FindAction(INPUT_TARGET_ACTION);
 
         this.speed = speed;
-        this.bullet = bullet;
 
         this.gameManager = gameManager;
     }
@@ -76,12 +73,10 @@ public class PlayerControler : MonoBehaviour
         targetPosition.z = transform.position.z - cam.transform.position.z;
 
         targetPosition = cam.ScreenToWorldPoint(targetPosition);
-        Debug.Log(targetPosition.z);
 
         Vector3 direction = (targetPosition - transform.position).normalized;
-        BulletBehavior newBullet = Instantiate(bullet);
-        newBullet.Initialize(transform.position, direction, 5f, gameManager);
-        gameManager.AddBullet(newBullet);
+
+        gameManager.AddBullet(direction);
     }
 
 }

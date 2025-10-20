@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class EnemiesSpawner : MonoBehaviour
 {
     private Vector3 minPoint;
     private Vector3 maxPoint;
