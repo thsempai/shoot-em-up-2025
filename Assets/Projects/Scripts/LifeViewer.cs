@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class LifeViewer : MonoBehaviour
 {
     private Image image;
-    private Canvas canvas;
     private Vector2 firstImagePosition;
     private Vector2 imageOffSet;
+
+    public Canvas Canvas => GetComponent<Canvas>();
 
     private List<Image> images = new();
 
@@ -18,8 +19,6 @@ public class LifeViewer : MonoBehaviour
         this.image = image;
         this.firstImagePosition = firstImagePosition;
         this.imageOffSet = imageOffSet;
-
-        canvas = GetComponent<Canvas>();
 
         UpdateImages(initialLife);
     }
@@ -34,7 +33,7 @@ public class LifeViewer : MonoBehaviour
             }
             for (int index = images.Count; index < life; index++)
             {
-                Image newImage = Instantiate(image, canvas.transform);
+                Image newImage = Instantiate(image, transform);
                 images.Add(newImage);
                 Vector2 position = firstImagePosition + index * imageOffSet;
                 newImage.rectTransform.anchoredPosition = position;

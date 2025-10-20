@@ -53,16 +53,20 @@ MonoBehaviour:
   enemiesBatchNumber: 30
   cooldown: 0.1
   gameManager: {fileID: 4513057005452091194, guid: 51bc5d7577b6e3347af8a8dca8568a09, type: 3}
-  life: 3
+  life: 8
   player: {fileID: 3796885351369254674, guid: 9380f9c6b7ad33e4bab4610cbe2d88aa, type: 3}
   playerInputActionAsset: {fileID: -944628639613478452, guid: eb64cdcc541b3a640873d976f0c94e72, type: 3}
   playerPosition: {x: 100, y: 100}
   playerSpeed: 12
   bulletsSpawner: {fileID: 6577616868039768667, guid: f828cdecaff2c434b80708f26e345e99, type: 3}
   bulletPrefab: {fileID: 8756020575663308469, guid: 6d94b983f79329c429fd35a9de7749e2, type: 3}
+  bulletSpeed: 5
   bulletSpawnDecal: 0.5
   bulletsBatchNumber: 10
   lifeCanvas: {fileID: 7374150423376996592, guid: 2b5751eabe0813b49b9d205c58d22784, type: 3}
   lifeImage: {fileID: 3971730888732056908, guid: 9e5faffe5184a2c45aa2f10b1fa1fbdb, type: 3}
-  firstImagePosition: {x: 0, y: 0}
-  imageOffSet: {x: 0, y: 0}
+  firstImagePosition: {x: 0, y: -10}
+  imageOffSet: {x: -60, y: 0}
+  scoreViewer: {fileID: 1136640366187853398, guid: 5fedb8f791333874da81517ff73a59f8, type: 3}
+  scoreDigit: 6
+  scorePosition: {x: 10, y: -10}

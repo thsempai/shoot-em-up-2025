@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -16,9 +16,12 @@ public class GameManager : MonoBehaviour
 
     private int playerLife;
 
-    private LifeViewer lifeViewer;
+    private int score;
 
-    public void Initialize(EnemiesSpawner enemiesSpawner, BulletsSpawner bulletsSpawner, float bulletDecal, float bulletSpeed, float cooldown, PlayerControler player, int playerLife, LifeViewer lifeViewer)
+    private LifeViewer lifeViewer;
+    private ScoreViewer scoreViewer;
+
+    public void Initialize(EnemiesSpawner enemiesSpawner, BulletsSpawner bulletsSpawner, float bulletDecal, float bulletSpeed, float cooldown, PlayerControler player, int playerLife, LifeViewer lifeViewer, ScoreViewer scoreViewer)
     {
         this.enemiesSpawner = enemiesSpawner;
         this.bulletsSpawner = bulletsSpawner;
@@ -28,6 +31,9 @@ public class GameManager : MonoBehaviour
         this.lifeViewer = lifeViewer;
         this.bulletDecal = bulletDecal;
         this.bulletSpeed = bulletSpeed;
+        this.scoreViewer = scoreViewer;
+        score = 0;
+        scoreViewer.UpdateScore(score);
     }
 
     private void Update()
@@ -67,6 +73,14 @@ public class GameManager : MonoBehaviour
     public void BulletLeaveGame(BulletBehavior bulletBehavior)
     {
         bulletsSpawner.DeSpawn(bulletBehavior);
+    }
+
+    public void EnemyHasBeenDestroyed(EnemyBehavior enemy)
+    {
+        EnemyLeaveGame(enemy);
+        score++;
+        scoreViewer.UpdateScore(score);
+
     }
 
     public void EnemyLeaveGame(EnemyBehavior enemy)

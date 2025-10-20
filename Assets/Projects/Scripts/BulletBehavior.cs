@@ -34,7 +34,7 @@ public class BulletBehavior : MonoBehaviour, IPoolClient
     {
         if (other.TryGetComponent<EnemyBehavior>(out EnemyBehavior enemy))
         {
-            manager.EnemyLeaveGame(enemy);
+            manager.EnemyHasBeenDestroyed(enemy);
         }
         manager.BulletLeaveGame(this);
     }

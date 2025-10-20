@@ -45,7 +45,9 @@ public class GameInitializer : MonoBehaviour
     [SerializeField] Image lifeImage;
     [SerializeField] Vector2 firstImagePosition;
     [SerializeField] Vector2 imageOffSet;
-
+    [SerializeField] ScoreViewer scoreViewer;
+    [SerializeField] int scoreDigit;
+    [SerializeField] Vector2 scorePosition;
 
 
     void Start()
@@ -63,6 +65,7 @@ public class GameInitializer : MonoBehaviour
         player = Instantiate(player);
         lifeCanvas = Instantiate(lifeCanvas);
         bulletsSpawner = Instantiate(bulletsSpawner);
+        scoreViewer = Instantiate(scoreViewer);
     }
 
     private void InitializeObjects()
@@ -76,11 +79,13 @@ public class GameInitializer : MonoBehaviour
 
         player.GetComponent<PlayerCollisionInfo>().Initialize(gameManager);
 
-        gameManager.Initialize(enemiesSpawner, bulletsSpawner, bulletSpawnDecal, bulletSpeed, cooldown, player, life, lifeCanvas);
+        gameManager.Initialize(enemiesSpawner, bulletsSpawner, bulletSpawnDecal, bulletSpeed, cooldown, player, life, lifeCanvas, scoreViewer);
 
         lifeCanvas.Initialize(lifeImage, life, firstImagePosition, imageOffSet);
 
         bulletsSpawner.Initialize(bulletPrefab, bulletsBatchNumber);
+
+        scoreViewer.Initialize(scoreDigit, lifeCanvas.Canvas, scorePosition);
 
     }
 
